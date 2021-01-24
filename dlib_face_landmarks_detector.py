@@ -21,6 +21,16 @@ class face_landmarks_detector():
         self.predictor = predictor
 
     def detect(self):
+        if '.mp4' in self.path or self.path == 0:
+            # Define the codec and create VideoWriter object
+            fourcc = cv2.VideoWriter_fourcc(*'FMP4')
+            if self.path == 0:
+                out_name = "camera_output.mp4"
+            else:
+                out_name = self.path.split('.mp4')[0] + "_output.mp4"
+            out = cv2.VideoWriter(out_name, fourcc, args.fps, (args.width, args.height))
+
+        frame_id = 0
         while True:
             if '.jpg' in self.path:
                 frame = cv2.imread(self.path)
@@ -45,13 +55,26 @@ class face_landmarks_detector():
                 for j in range(68):
                     x = landmarks.part(j).x
                     y = landmarks.part(j).y
-                    cv2.circle(frame, (x, y), 6, (255, 0, 0), -1)  # plot each of the landmarks with circle
+                    cv2.circle(frame, (x, y), 2, (255, 0, 0), -1)  # plot each of the landmarks with circle
+
+            if '.jpg' in self.path:
+                out_name = self.path.split('.jpg')[0] + "_output.jpg"
+                if frame_id == 0:
+                    print("Output has been saved at: ", out_name)
+                    cv2.imwrite(out_name, frame)
+            elif '.mp4' in self.path:
+                out.write(frame)
 
             cv2.imshow("Frame", frame)
             key = cv2.waitKey(1)
 
+            if cv2.getWindowProperty('Frame', cv2.WND_PROP_VISIBLE) == 0:
+                break
+
             if key == 27:
                 break
+
+            frame_id += 1
 
 
 if __name__ == "__main__":
@@ -64,11 +87,17 @@ if __name__ == "__main__":
             print("passed path is not a file: {}".format(args.path))
 
     cam = cv2.VideoCapture(args.path)
-    
+
+    if args.path == 0 or 'mp4' in args.path:
+        args.fps = cam.get(cv2.CAP_PROP_FPS)
+        print("args.fps: ", args.fps)
+        args.width = int(cam.get(cv2.CAP_PROP_FRAME_WIDTH))  # float `width`
+        args.height = int(cam.get(cv2.CAP_PROP_FRAME_HEIGHT))  # float `height`
+        print("width: {}   height: {}".format(args.width, args.height))
+
     detector = dlib.get_frontal_face_detector()
     predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
 
     fld = face_landmarks_detector(args, cam, detector, predictor)
 
     fld.detect()
-  
