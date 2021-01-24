@@ -12,7 +12,7 @@ def get_argparser():
 args = get_argparser()
 
 
-# Press 'Escape' key to quit process.
+# Close the window or press 'Escape' key to quit the process.
 class face_landmarks_detector():
     def __init__(self, args, cam, detector, predictor):
         self.path = args.path
