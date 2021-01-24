@@ -12,3 +12,6 @@ File 'shape_predictor_68_face_landmarks.dat' denotes weights file for the landma
 Requirements:  
 openCV (4.1.0.25)  
 dlib (19.21.1)  
+
+<img src="/outputs/multi_face_1_output.jpg" width="1000" height="400">
+
