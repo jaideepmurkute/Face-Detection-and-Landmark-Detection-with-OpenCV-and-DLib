@@ -1,6 +1,7 @@
 # Face-Detection-and-Landmark-Detection-with-OpenCV-and-DLib
 
 Code to detect face and the 68 landmark points on face, from the camera feed.  
+Supports Image, Video and the live camera feed.
 
 Run: python dlib_face_landmarks_detector.py  
 
