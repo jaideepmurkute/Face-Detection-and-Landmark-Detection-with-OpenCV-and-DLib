@@ -17,5 +17,7 @@ openCV (4.1.0.25)
 dlib (19.21.1)  
 
 ## Sample Output
-<img src="/outputs/multi_face_1_output.jpg" width="1000" height="400">
+<img src="/outputs/multi_face_1_output.jpg" width="1000" height="400">  
+
+<img src="/outputs/multi_face_output.jpg" width="700" height="400">
 
