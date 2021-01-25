@@ -2,11 +2,12 @@
 
 Code to detect face and the 68 landmark points on face, from the camera feed.  
 Supports Image, Video and live camera feed.
+Supports two types of face detctors from DLib - HoG & CNN. 
 
 ## Usage:  
-For Image inputs: python dlib_face_landmarks_detector.py --path="input.jpg"  
-For Video inputs: python dlib_face_landmarks_detector.py --path="input.mp4"  
-For Cameta inputs: python dlib_face_landmarks_detector.py  
+For Image inputs: python dlib_face_landmarks_detector.py --path="input.jpg" --face_detector_type="hog"  
+For Video inputs: python dlib_face_landmarks_detector.py --path="input.mp4" --face_detector_type="cnn"  
+For Cameta inputs: python dlib_face_landmarks_detector.py --face_detector_type="cnn"  
 
 Close the window or press 'Escape' key to stop the detection process.  
 
